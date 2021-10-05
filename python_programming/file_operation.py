@@ -1,3 +1,5 @@
+import os
+
 s = """\
 AAA
 BBB
@@ -27,3 +29,6 @@ with open('test.txt', 'w+') as f:
     print(f.read())
     f.seek(0)
     f.write('a')
+
+print(os.path.isfile('test.txt'))
+print(os.getcwd())
