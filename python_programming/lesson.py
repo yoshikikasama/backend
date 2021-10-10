@@ -51,3 +51,6 @@ for day, fruit, drink in zip(days, fruits, drinks):
     print(day, fruit, drink)
 
 
+y = 'None'
+x = 1 if y else 2
+print(x)
