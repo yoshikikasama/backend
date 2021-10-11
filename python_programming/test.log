@@ -1,0 +1,14 @@
+CRITICAL:root:critical
+ERROR:root:error
+WARNING:root:warning
+INFO:root:info
+CRITICAL:root:critical
+ERROR:root:error
+WARNING:root:warning
+INFO:root:info
+DEBUG:__main__:debug
+INFO:root:info
+INFO:log_test:from logetst
+INFO:root:info
+INFO:log_test:from logetst
+DEBUG:log_test:from logtest debug
