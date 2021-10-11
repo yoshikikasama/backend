@@ -1,3 +1,9 @@
+"""
+setattr(オブジェクト, 追加したい属性, 値)
+obejctに属性を追加したいときに使われる関数
+"""
+
+
 class Sample:
     def __init__(self, params):
         keys = ['name']
