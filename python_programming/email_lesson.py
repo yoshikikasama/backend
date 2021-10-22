@@ -5,10 +5,10 @@ import smtplib
 
 smtp_host = 'smtp.live.com'
 smtp_port = 587
-from_email = 'kasamayoshiki@gmail.com'
-to_email = 'kasamayoshiki@gmail.com'
-username = 'kasamayoshiki@gmail.com'
-password = 's3ybgd1027'
+from_email = 'hoge@gmail.com'
+to_email = 'hoge@gmail.com'
+username = 'hoge@gmail.com'
+password = 'hoge'
 
 # msg = message.EmailMessage()
 msg = multipart.MIMEMultipart()
