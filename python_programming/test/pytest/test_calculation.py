@@ -1,3 +1,7 @@
+"""
+pytest test_calculation.py --cov=calculation
+pytest test_calculation.py --cov=calculation　--cov-report=term-missing
+"""
 import os
 import pytest
 import calculation
@@ -11,9 +15,14 @@ class TestCalc():
         print('start')
         cls.cal = calculation.Calc()
         cls.test_file_name = 'test.txt'
+        cls.test_dir = '/tmp/test_dir'
+
     @classmethod
     def teardown_class(cls):
         print('end')
+        import shutil
+        if os.path.exists(cls.test_dir):
+            shutil.rmtree(cls.test_dir)
         del cls.cal
     # 関数test前に呼ばれる関数
     def setup_method(self, method):
@@ -23,6 +32,11 @@ class TestCalc():
     def teardown_method(self, method):
         print(f'method={method.__name__}')
         # del self.cal
+    def test_save_no_dir(self):
+        self.cal.save(self.test_dir, self.test_file_name)
+        test_file_path = os.path.join(self.test_dir, self.test_file_name)
+        assert os.path.exists(test_file_path) is True
+
     # @pytest.mark.skip(reason='skip!')
     @pytest.mark.skipif(is_release==True, reason='skip!')
     def test_add_num_and_double(self, request, csv_file):
