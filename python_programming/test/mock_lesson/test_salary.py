@@ -55,5 +55,42 @@ class TestSalary(unittest.TestCase):
         self.assertEqual(salary_price, 101)
         self.mock_bonus.assert_called()
 
+    def test_calculation_salary_patch_side_effect(self):
+        # def f(year):
+        #     return 1
+        # self.mock_bonus.side_effect = lambda year : 1
+        self.mock_bonus.side_effect = [
+            1,
+            2,
+            3,
+            ValueError('Bankrupt!')
+        ]
+        
+        s = salary.Salary(year=2017)
+        salary_price = s.calculation_salary()
+        self.assertEqual(salary_price, 101)
+
+        s = salary.Salary(year=2018)
+        salary_price = s.calculation_salary()
+        self.assertEqual(salary_price, 102)
+
+        s = salary.Salary(year=2019)
+        salary_price = s.calculation_salary()
+        self.assertEqual(salary_price, 103)
+
+        s = salary.Salary(year=200)
+        with self.assertRaises(ValueError):
+            s.calculation_salary()
+
+    @mock.patch('salary.ThirdPartyBonusRestApi', spec=True)
+    def test_calculation_salary_class(self, MockRest):
+        mock_rest = MockRest()
+        mock_rest.bonus_price.return_value = 1
+        s = salary.Salary(year=2017)
+        salary_price = s.calculation_salary()
+
+        self.assertEqual(salary_price, 101)
+        mock_rest.bonus_price.assert_called()
+
 if __name__ == '__main__':
     unittest.main()
