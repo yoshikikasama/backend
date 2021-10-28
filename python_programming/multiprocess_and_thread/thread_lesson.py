@@ -75,7 +75,7 @@ if __name__ == '__main__':
     #     t = threading.Thread(target=worker1)
     #     # t = threading.Thread(name='rename_worker1', target=worker1)
     #     # defaultではsetDaemonがFalseでjoinと同じ働きをする
-    #     # 処理が終わった場合、t1の処理が終わっていない場合でも強制終了する
+    #     # daemon = 処理が終わった場合、t1.threadの処理が終わっていない場合でも強制終了する
     #     t.setDaemon(True)
     #     t.start()
     
