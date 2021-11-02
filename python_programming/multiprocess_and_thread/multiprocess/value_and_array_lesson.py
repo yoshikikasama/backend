@@ -1,7 +1,5 @@
 import logging
 import multiprocessing
-import time
-from typing import MutableMapping
 
 logging.basicConfig(
     level=logging.DEBUG, format='%(processName)s: %(message)s'
