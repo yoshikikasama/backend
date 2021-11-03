@@ -11,11 +11,41 @@
 import string
 import random
 
-from Crypto.zcipher import AES
+from Crypto.Cipher import AES
 
 print(AES.block_size)
 print(string.ascii_letters)
 key = ''.join(
-    random.choice(string.ascii_letters) for _ in ()
+    random.choice(string.ascii_letters) for _ in range(AES.block_size)
 )
-print(key)
+# 初期ベクトル
+iv = ''.join(
+    random.choice(string.ascii_letters) for _ in range(AES.block_size)
+)
+key = key.encode('utf-8')
+iv = iv.encode('utf-8')
+
+# 'wb'はバイナリファイルへの書き込み
+with open('plaintext', 'r') as f, open('enc.dat', 'wb') as e:
+    plaintext = f.read()
+    # AES.MODE_CBC ⇨暗号化アルゴリズム, intの2が入る
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    padding_length = AES.block_size - len(plaintext) % AES.block_size
+    plaintext += chr(padding_length) * padding_length
+    plaintext = plaintext.encode('utf-8')
+    # 暗号化
+    cipher_text = cipher.encrypt(plaintext)
+    e.write(cipher_text)
+
+with open('enc.dat', 'rb') as f:
+    cipher2 = AES.new(key, AES.MODE_CBC, iv)
+    # 複合化
+    decrypted_text = cipher2.decrypt(f.read())
+    print(decrypted_text[:decrypted_text[-1]].decode('utf-8'))
+
+
+# cipher2 = AES.new(key, AES.MODE_CBC, iv)
+# decrypted_text = cipher2.decrypt(cipher_text)
+# print(decrypted_text)
+# print(decrypted_text[-1])
+# print(decrypted_text[:-decrypted_text[-1]])
