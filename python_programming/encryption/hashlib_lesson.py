@@ -3,7 +3,7 @@ import os
 import base64
 
 
-print(hashlib.sha256(b'password').hexdigest())
+# print(hashlib.sha256(b'password').hexdigest())
 
 user_name = 'user1'
 user_pass = 'password'
