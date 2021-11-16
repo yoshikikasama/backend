@@ -1,19 +1,22 @@
 import contextlib
 
 
-def tag(f):
-    def _wrapper(content):
-        print('<h2>')
-        r = f(content)
-        print('</h2>')
-        return r
-    return _wrapper
+def tag(name):
+    def _tag(f):
+        def _wrapper(content):
+            print(f'<{name}>')
+            r = f(content)
+            print(f'/<{name}>')
+            return r
+        return _wrapper
+    return _tag
 
 
-# @tag
 def f(content):
     print(content)
 
 
-f = tag(f('test'))
-# f('test')
+# tag('h2')(f('test'))
+f = tag('h2')(f)
+f('test')
+
