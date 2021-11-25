@@ -2,4 +2,3 @@ print('{name:{fill}{align}{width}}'.format(name='center', fill='*', align='^', w
 print('{:,}'.format(123456789))
 print('{:+f}{:+f}'.format(3.14, -3.14))
 print('{:.2%}'.format(19/22))
-print('test')
