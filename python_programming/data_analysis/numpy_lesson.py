@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.shape_base import vstack
 
 a = np.array([[1, 2, 3], [4, 5, 6]])
 print(a)
