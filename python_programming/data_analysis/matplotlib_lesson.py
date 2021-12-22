@@ -27,10 +27,20 @@ import numpy as np
 # plt.title('Title')
 # plt.show()
 
-labels = ('Python', 'java', 'C++', 'Ruby')
-sizes = [10, 20, 30, 40]
-colors = ['red', 'green', 'yellow', 'blue']
-# autopctの指定は浮動小数点で表示するもの
-plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True)
-plt.axis('equal')
+# labels = ('Python', 'java', 'C++', 'Ruby')
+# sizes = [10, 20, 30, 40]
+# colors = ['red', 'green', 'yellow', 'blue']
+# # autopctの指定は浮動小数点で表示するもの
+# plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True)
+# plt.axis('equal')
+# plt.show()
+
+y = [2, 4, 6, 8, 10]
+y2 = [10, 11, 12, 13, 14]
+x = np.arange(5)
+
+plt.plot(x, y, label='Y')
+plt.plot(x, y2, label='Y2')
+# 図形の線がどのどのデータを指しているかを表示してくれる
+plt.legend()
 plt.show()
