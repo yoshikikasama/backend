@@ -75,6 +75,6 @@ for data in predicted_data:
     next_unix += one_day
     df_appl.loc[next_date] = np.append([np.nan]* (len(df_appl.columns)-1), data)
 
-df_appl['Close'].plot(figsize=(15,6), color="green")
-df_appl['Predict'].plot(figsize=(15,6), color="orange")
+df_appl['Close'].plot(figsize=(15, 6), color="green")
+df_appl['Predict'].plot(figsize=(15, 6), color="orange")
 plt.show()
