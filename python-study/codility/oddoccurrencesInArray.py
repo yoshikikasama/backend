@@ -20,7 +20,7 @@
         
     # return test_list[0]
 
-# set関数では重複した要素は取り除くことができる
+# set関数では重複した要素は取り除くことができる3
 def solution(A):
     numSet = set()
     for i in A:
@@ -31,7 +31,6 @@ def solution(A):
 
     for j in numSet:
         return j
-
 
 A = [9, 3, 9, 3, 9, 7, 9]
 sol = solution(A)
