@@ -6,7 +6,6 @@
 A = [0, 1, 0, 1, 1]
 
 def solution(A):
-    # write your code in Python 3.6
     A.reverse()
     sum = 0
     suffixSum = 0
