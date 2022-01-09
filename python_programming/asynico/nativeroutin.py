@@ -7,6 +7,7 @@ async def worker():
     print('start')
     # 非同期用のコルーチンのsleep
     # yield from asyncio.sleep(2)
+    # 処理を待たずに次の処理が走れる
     await asyncio.sleep(2)
     print('stop')
 
