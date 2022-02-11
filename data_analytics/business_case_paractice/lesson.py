@@ -1,3 +1,4 @@
+from turtle import title
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
@@ -76,4 +77,43 @@ sample = pd.read_csv(datas_path + "/case1/sample.csv", header=None)
 # plt.axvline(x=train['y'].mean(), color='red')
 # train['y'].plot.hist(figsize=(12, 4), title='histgram')
 # plt.savefig('sample_fig.png')
+# plt.show()
+
+# 箱ひげ図
+# データ分布を確認するための図
+# 上側ヒンジ・・・「中央値以上の値」の中央値
+# 下側ヒンジ・・・「中央値以下の値」の中央値
+# train[['y', 'week']].boxplot(by='week')
+# plt.show()
+
+# trainのtemperatureの折れ線グラフ。
+# ax = train['temperature'].plot(title='temperature')
+# ax.set_xlabel('time')
+# ax.set_ylabel('temperature')
+# plt.show()
+
+# 欠損値・・・何らかの理由でデータの値が入っていない状態のこと
+# isnullで欠損の有無を出す
+# print(train.isnull())
+# 各カラムに欠損値が1つ以上あるかないかを確かめる
+# print(train.isnull().any())
+# 各カラムに欠損値がいくつあるかを確かめる
+# print(train.isnull().sum())
+
+# 欠損値の処理方法・・・何らかの値を代入、欠損値を含む行を削除
+# 欠損値を0で補完
+# print(train.fillna(0))
+# ある列に欠損値があった場合のみ、その行を削除
+# print(train.dropna(subset=['kcal']))
+# 行の値がそれぞれいくつあるかを確認
+# print(train['precipitation'].value_counts())
+
+# 正の相関・・・一方が上がるともう片方も上がる
+# 負の相関・・・一方が上がるともう片方が下がる
+# corr()で相関係数を算出,1に近いほど度合いが強い、0に近いほど度合いは弱い
+# print(train[['y', 'temperature']].corr())
+# print(train[['y', 'kcal']].corr())
+
+# 散布図はplot.scatter関数を使う
+# train.plot.scatter(x='temperature', y='y', figsize=(5,5))
 # plt.show()
