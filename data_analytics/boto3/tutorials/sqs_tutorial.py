@@ -1,5 +1,5 @@
 """
-Amazon SQS(Simple Queue Service)
+Amazon SQS(Simple Queue Service)・・・マネージド型メッセージキュー・ブローカー。サーバレス
 """
 
 from email.message import Message
