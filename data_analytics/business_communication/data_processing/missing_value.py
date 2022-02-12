@@ -1,7 +1,6 @@
-"""データ変換処理
-マッピング・・・ユーザーデータの性別を日本語にするなど。
-ビン分割・・・年齢を10歳区切りで集計するなど
-
+"""欠損値の処理
+欠損値・・・Nanなどで表現される「存在しない」ことを表す数値
+  　　　　　以下に紹介するような「除外」や「穴埋め」といった方法で対処する
 """
 # pandasを利用したデータの加工方法
 import pandas as pd
@@ -27,18 +26,17 @@ rating_df.columns = rating_col_info.split('|')
 left_table = rating_df.sample(100, random_state=0)
 right_table = user_df.sample(500, random_state=0)
 
-# ユーザーデータの英語を日本語にする
-# print(user_df.head())
-# print(user_df[' gender '].value_counts())
-gender_map_table = {
-    'F': '女性',
-    'M': '男性',
-}
-# map関数
-user_df['gender_ja'] = user_df[' gender '].map(gender_map_table)
-# print(user_df.head())
+merged_df = pd.merge(left_table, right_table, on='user id ', how='left')
+# print(merged_df.head())
 
-# ビン分割
-# 年齢を10歳区切りで集計したい
-user_df[' age '].value_counts().sort_index().plot(kind='bar')
-plt.show()
+# 欠損値を除外する
+# print('全ての行', merged_df.shape[0])
+# print('欠損値を一つでも含む行を除外', merged_df.dropna().shape[0])
+
+# 欠損値を穴埋めする
+# 欠損値を埋める前
+print('欠損値処理をする前:', merged_df[' gender '].value_counts())
+print('欠損値処理をした後:', merged_df[' gender '].fillna('性別データなし').value_counts())
+
+# 年齢の欠損値についてその平均値で穴埋めする
+print(merged_df[' age '].fillna(merged_df[' age '].mean()))
