@@ -13,7 +13,8 @@ TextIOWrapper・・・テキストモード
 1.　s3　bucketの作成
 2.　「test.csv」のupload
 3. csvファイルの読み込み
-4. 作成したobject,bucketの削除
+4. s3上のcsvファイルから特定の値を抽出
+5. 作成したobject,bucketの削除
 
 """
 import io
@@ -82,8 +83,20 @@ def get_csv_file(bucket_name, key):
     # print(type(body))
     for row in csv.DictReader(body):
         print(row)
-        print(type(row))
 
+
+# def select_object(bucket_name, key):
+#     response = s3_client().select_object_content(
+#         Bucket=bucket_name,
+#         Key=key,
+#         Expression='Select name from S3Objects',
+#         ExpressionType='SQL',
+#         InputSerialization={'CSV': {'FileHeaderInfo': 'Use'}},
+#         OutputSerialization={'JSON': {}}
+#     )
+#     for event in response['Payload']:
+#         if 'Records' in event:
+#             print(event['Records']['Payload'].decode())
 
 def list_buckets(bucket_name):
     response = s3_client().list_objects_v2(
@@ -126,6 +139,7 @@ def main():
     create_bucket_policy(BUCKET_NAME)
     upload_file(BUCKET_NAME, KEY)
     get_csv_file(BUCKET_NAME, KEY)
+    # select_object(BUCKET_NAME, KEY)
     keys = list_buckets(BUCKET_NAME)
     delete_objects(BUCKET_NAME, keys)
     delete_bucket(BUCKET_NAME)

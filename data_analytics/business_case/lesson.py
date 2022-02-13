@@ -1,12 +1,22 @@
+"""
+Seriesオブジェクト・・・一次元配列(data,index(値の指定ができる),dtype,copy,name)
+DataFrame・・・二次元配列(data,index,columns,dtype,copy)
+"""
 from turtle import title
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
+from sqlalchemy import column
 
 datas_path = "/Users/kasamayoshiki/Documents/tmp/datas"
 train = pd.read_csv(datas_path + "/case1/train.csv")
 test = pd.read_csv(datas_path + "/case1/test.csv")
 sample = pd.read_csv(datas_path + "/case1/sample.csv", header=None)
+
+# カラム名の変更
+print(train.rename(columns={'temperature': '気温'}))
+# map関数で小数点の調整
+print(train['temperature'].map('{:.2f}'.format))
 
 # head() 先頭5行分を読み込む関数
 # print(train.head(10))
@@ -117,3 +127,6 @@ sample = pd.read_csv(datas_path + "/case1/sample.csv", header=None)
 # 散布図はplot.scatter関数を使う
 # train.plot.scatter(x='temperature', y='y', figsize=(5,5))
 # plt.show()
+
+# csvへの書き込み aは追記
+train.to_csv('test.csv', mode='w', index=False)
