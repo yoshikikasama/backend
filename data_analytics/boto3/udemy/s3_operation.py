@@ -30,14 +30,23 @@ def create_bucket(bucket_name):
 
 
 def create_bucket_policy():
+    # IAMポリシーでアクセスする許可と拒否の条件をJSON形式で記述したものがPolicyドキュメント
     bucket_policy = {
-        # "Version": "2012-10-17",
+        # policy statementの現行version
+        "Version": "2012-10-17",
         "Statement": [
             {
+                # Statement ID(任意のID)
                 "Sid": "AddPerm",
+                # リソースへのアクセスを許可するには、Effect 要素を Allow に
                 "Effect": "Allow",
-                "Principal": "*",
+                # ステートメントのアクションやリソースへのアクセスが許可されているアカウントまたはユーザー
+                "Principal": {
+                    "AWS": "arn:aws:iam::068788852374:user/yoshiki.kasama"
+                },
+                # s3に対する全てのactionを許可
                 "Action": ["s3:*"],
+                # ステートメントで取り扱う一連のオブジェクトを指定します。
                 "Resource": ["arn:aws:s3:::yoshiki-s3-2022-bucket/*"]
             }
         ]
@@ -92,11 +101,14 @@ def upload_large_file():
     file_path = "/Users/kasamayoshiki/Documents/tmp/classmethod/img/eagle.jpg"
     key_path = "multipart_files/eagle.jpg"
     s3_resource().meta.client.upload_file(file_path, BUCKET_NAME, key_path,
+                                          # 追加の引数
                                           ExtraArgs={
                                               'ACL': 'public-read',
                                               #   'contentType': 'text'
                                           },
+                                          #   データの転送中に使用されるconfig
                                           Config=config,
+                                          #   データの転送中に呼ばれる関数
                                           Callback=ProgressPercentage(file_path))
 
 
