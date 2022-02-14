@@ -41,8 +41,18 @@ def main():
     kokyaku_data['顧客名'] = kokyaku_data['顧客名'].str.replace('　', '')
     # print(kokyaku_data['顧客名'].head())
     # 日付の揺れ
+    # isdigit()でstr型の数値かどうかを判定
+    # astype(str)でstr型に変換
+    # 日付を計算するために格納されている数値
+    # serial値：Excelにおいて日付を計算処理するために格納されている数値
     flg_is_serial = kokyaku_data['登録日'].astype('str').str.isdigit()
-    print(flg_is_serial.sum())
+    # print(flg_is_serial.sum())
+    # 引数のunitは単位を表し、今回は日付単位の「D」を指定
+    # to_timedelta関数を使ってシリアル値を日付型に変換
+    fromSerial = pd.to_timedelta(kokyaku_data.loc[flg_is_serial, '登録日'].astype('float'), unit='D') + pd.to_datetime('1900/01/01')
+    fromString = pd.to_datetime(kokyaku_data.loc[~flg_is_serial, '登録日'])
+    # データの結合
+    kokyaku_data['登録日'] = pd.concat([fromSerial, fromString])
 
 
 if __name__ == '__main__':
