@@ -28,3 +28,5 @@ class TestValidate:
         """
         # Falseでreturnされるかどうか
         assert not main.validate(text)
+
+# 読みやすくするためにテストコードを準備(Arrange)と実行(Act)と検証(Assert)に
