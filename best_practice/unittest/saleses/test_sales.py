@@ -45,7 +45,7 @@ class TestSales:
         print(sales)
 
     def test_validate_price(self):
-        sale1 = Sale(1, 1, 2, 1)    
+        sale1 = Sale(1, 1, 2, 1)
         sale2 = Sale(1, 1, 2, 10)
         sales = Sales([sale1, sale2])
         assert sales.price == 11
