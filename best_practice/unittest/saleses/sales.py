@@ -29,18 +29,18 @@ from typing import List
 class Sale:
     id: int
     item_id: int
-    price: int
     amount: int
+    price: int
 
     def validate(self):
-        if sale['price'] <= 0:
+        if self.price <= 0:
             raise ValueError('Invalid sale.price')
-        if sale['ammount'] <= 0:
+        if self.amount <= 0:
             raise ValueError('Invalid sale.amount')
 
     # 各売上の料金を計算する処理をSalesに実装
     # property:値を簡単に変更できない
-    @property
+    # @property
     def price(self):
         return self.amount * self.price
 
@@ -61,8 +61,13 @@ class Sales:
             for row in reader:
                 try:
                     sale = Sale(**row)
+                    sale.id = int(sale.id)
+                    sale.item_id = int(sale.item_id)
+                    sale.amount = int(sale.amount)
+                    sale.price = int(sale.price)
                     sale.validate()
-                except Exception:
+                except Exception as e:
+                    print(e)
                     continue
                 data.append(sale)
         return cls(data=data)

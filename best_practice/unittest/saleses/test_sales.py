@@ -28,16 +28,24 @@ from sales import Sale, Sales
 class TestSale:
     def test_validate_invalid_price(self):
         # 値の確認をするテストでCSVを用意する必要がなくなった
-        sale = Sale(1, 1, 0, 2)
+        sale = Sale(1, 1, 2, 0)
         with pytest.raises(ValueError):
             sale.validate()
 
     def test_validate_invalid_amount(self):
-        sale = Sale(1, 1, 1000, 0)
+        sale = Sale(1, 1, 0, 1000)
         with pytest.raises(ValueError):
             sale.validate()
     
 
 class TestSales:
     def test_from_assert_invalid_row(self):
-        pass
+        sales = Sales([])
+        sales = sales.from_assert()
+        print(sales)
+
+    def test_validate_price(self):
+        sale1 = Sale(1, 1, 2, 1)    
+        sale2 = Sale(1, 1, 2, 10)
+        sales = Sales([sale1, sale2])
+        assert sales.price == 11
