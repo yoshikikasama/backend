@@ -21,7 +21,20 @@
 ■外部APIのMock化
 ・単体テストから外部環境への依存を排除する。requestsがバックエンドサーバーへアクセスするのを
 responsesを使ってmockする。
+・外部のAPIやサービス
+ responsesを使ってmock化する
+・データベースやサーバーなどのミドルウェア(MysqlやRedisなど)
+ RDBはbackendをSQLiteに置き換える。
+ Redisはfakeredisに置き換える
+・クラウドサービス(S3, DynamoDBなど)
+ motoでモックに置き換える。
+・単体テストを実行するPC環境やディレクトリー構成
+ 標準ライブラリーのtempfileを使う
+ プロジェクト内の仮想環境venvなど、バージョン管理システムで管理されないファイルに依存しない。
 
+■test用のデータはtest終了後に削除する
+ tempfileモジュールにあるNamedTemporaryFileを使うと一時的なファイルが作られ、
+ ファイルクローズと同時に自動的に削除してくれる。
 fixture(conftest)をうまく活用する。
 parametrizeをうまく活用する。
 """
