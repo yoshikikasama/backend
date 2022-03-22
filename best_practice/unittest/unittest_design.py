@@ -35,6 +35,17 @@ responsesを使ってmockする。
 ■test用のデータはtest終了後に削除する
  tempfileモジュールにあるNamedTemporaryFileを使うと一時的なファイルが作られ、
  ファイルクローズと同時に自動的に削除してくれる。
+
+■便利なテストユーティリティー
+ django.test.TestCase・・・Djangoのプロジェクトをテストする場合に便利なassertメソッドを持っているテストケースクラス。
+ django.core.mail.outbox・・・テスト中に送信されたメールが保存されているオブジェクト。メールの中身が正しいかをテストできる。
+ freezegun・・・mock.patchできないdatetime.nowを簡単にパッチできる。
+ pytest・・・tempfileをより便利に使えるtmpdirなど付属の機能が提供されている。
+ pytest-django・・・pytestでDjangoプロジェクトをテストする場合に使う
+ pytest-freezegun・・・freezegunをpytestで便利に使えるツール
+ pytest-responses・・・responsesをpytestで便利に使えるツール
+ 
 fixture(conftest)をうまく活用する。
 parametrizeをうまく活用する。
+
 """
