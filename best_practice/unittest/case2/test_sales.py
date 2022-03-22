@@ -36,7 +36,7 @@ class TestSale:
         sale = Sale(1, 1, 0, 1000)
         with pytest.raises(ValueError):
             sale.validate()
-    
+
 
 class TestSales:
     def test_from_assert_invalid_row(self):
