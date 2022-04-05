@@ -71,5 +71,26 @@
  有意コードが必要な場合
  ・商品コード、学生番号などがシステム運用上必要な場合がある。(商品コードがあると問い合わせの際や倉庫作業次にコミュニケーションしやすい)
  その場合もコードは他の「アカウントの登録日」や「商品の区分」から有意コードを表示できるようにする。
+■カラム名の統一
+ 以下の場合は表記がぶれやすいので、大まかな指針を持っておく。
+ ・日時(dt, datetime, at)・・・_atにするのがプログラムを書く時に理解しやすい(expires_atなど)
+ ・種別(type, typ, flg, kbn)・・・Categoryなどの別tableにして外部キーにした方がいい。flag, flg, kbnは誤解しやすいので使わない。
+ ・ユーザーへの外部キー(reviewed_by, review_user, reviewer)・・・単にuserとするとどういう意図でのユーザーなのかわかりにくい。担当者などはer。
+                                                           記録として残す場合delete_byのように_byがわかりやすい。
+ ・bool(is_published, has_published, published, published_flg)・・・is_統一すると理解しやすい。
+ ・~から(since, from)・・・日時であればsinceの方が良い。主に未来の値として使う場合はfromの方が良い。
+ ・~まで(until, to)・・・sinceとuntil、fromとtoの組み合わせが自然。
 
+■DBのスキーママイグレーションとデータマイグレーションを分ける
+ ・カラムの追加とデータの移行、カラムの削除を一辺に行うとデータ定義の問題でエラーとなる。
+ 3回のマイグレーションに分ける
+ ・1回目:データの移動先フィールドを追加して、manage.pyでmakemigrations
+ ・2回目:manage.py makemigrations <app> --emptyで空のmigration fileを作成し、data migrationを実装
+ ・3回目:データの移動元フィールドを削除してmanage.py makemigrationsを実行
+ DB操作SQL
+ ・DDL(Data Definition Language)・・・Create tableやdelete、indexや制約を設定。
+ ・DML(Data Manipulation Language)・・・CRUD処理。
+■データマイグレーションはロールバックも実装する
+ ロールバック・・・DB処理において、トランザクション処理中にエラーが発生した場合に、そのトランザクション処理を開始する前の状態までdbを戻すこと。
+ 
 """
