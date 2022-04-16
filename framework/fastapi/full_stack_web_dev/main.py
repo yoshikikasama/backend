@@ -29,5 +29,3 @@ def hello_api():
     return {"detail": "Hello World!"}
 
 
-# uvicorn main:app --reload
-# /docs
