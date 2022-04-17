@@ -3,7 +3,9 @@ from sqlalchemy.orm import Session
 
 from db.session import get_db
 from schemas.jobs import JobCreate, ShowJob
-from db.repository.jobs import create_new_job, retreive_job, list_jobs, update_job_by_id
+from db.repository.jobs import (create_new_job, retreive_job,
+                                list_jobs, update_job_by_id,
+                                delete_job_by_id)
 from typing import List
 
 router = APIRouter()
@@ -39,3 +41,13 @@ def update_job(id: int, job: JobCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Job with id {id} does not exist")
     return {"detail": "Sucessfully updated data."}
+
+
+@router.delete("/delete/{id}")
+def delete_job(id: int, db: Session = Depends(get_db)):
+    owner_id = 1
+    message = delete_job_by_id(id=id, db=db, owner_id=owner_id)
+    if not message:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Job with id {id} does not exist")
+    return {"detail": "Sucessfully deleted the  data."}
