@@ -52,7 +52,7 @@ def db_session(app: FastAPI) -> Generator[SessionTesting, Any, None]:
     connection.close()
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def client(
     app: FastAPI, db_session: SessionTesting
 ) -> Generator[TestClient, Any, None]:
@@ -72,7 +72,7 @@ def client(
         yield client
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def normal_user_token_headers(client: TestClient, db_session: Session):
     return authentication_token_from_email(
         client=client, email=settings.TEST_USER_EMAIL, db=db_session
