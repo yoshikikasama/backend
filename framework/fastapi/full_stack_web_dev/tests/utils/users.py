@@ -26,8 +26,8 @@ def user_authentication_headers(client: TestClient, email: str, password: str):
     auth_token = response["access_token"]
     headers = {"Authorization": f"Bearer {auth_token}"}
     return headers
- 
- 
+
+
 def authentication_token_from_email(client: TestClient, email: str, db: Session):
     """
     Return a valid token for the user with given email.

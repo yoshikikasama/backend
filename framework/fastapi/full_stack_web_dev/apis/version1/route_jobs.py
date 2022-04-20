@@ -15,6 +15,7 @@ router = APIRouter()
 
 @router.post("/create-job", response_model=ShowJob)
 def create_job(job: JobCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user_from_token)):
+    print('test:', current_user)
     owner_id = current_user.id
     job = create_new_job(job=job, db=db, owner_id=owner_id)
     return job
