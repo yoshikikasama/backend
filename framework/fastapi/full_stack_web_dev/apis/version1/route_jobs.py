@@ -61,7 +61,7 @@ def delete_job(id: int, db: Session = Depends(get_db), current_user: User = Depe
         delete_job_by_id(id=id, db=db, owner_id=current_user.id)
         return {"detail": "Succesfully deleted the Job."}
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                        detail=f"You are not permitted!!")
+                        detail="You are not permitted!!")
 
 
 @router.get("/autocomplete")
