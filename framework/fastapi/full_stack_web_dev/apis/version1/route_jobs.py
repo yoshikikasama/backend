@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from db.session import get_db
-from db.models.jobs import Job
 from db.models.users import User
 from schemas.jobs import JobCreate, ShowJob
 from db.repository.jobs import (create_new_job,

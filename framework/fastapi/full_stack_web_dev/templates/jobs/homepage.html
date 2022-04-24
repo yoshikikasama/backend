@@ -12,7 +12,7 @@
             {% for job in jobs %}
                 <div class="col-lg-4 col-md-3 col-sm-10 mr-auto">
                     {% with obj=job %} <!-- job'u obj olarak veriyorusn burada-->
-                        {% include "components/card.html" %}
+                        {% include "components/cards.html" %}
                     {% endwith %}
 
                     {% if loop.index %3 %}
