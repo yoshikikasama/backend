@@ -1,13 +1,13 @@
 from fastapi import Request
-from typing import Optional, List
+from typing import List
 
 
 class LoginForm:
     def __init__(self, request: Request):
-        self.request : Request = request
-        self.errors : List = []
-        self.username : str = None
-        self.password : str = None
+        self.request: Request = request
+        self.errors: List = []
+        self.username: str = None
+        self.password: str = None
 
     async def load_data(self):
         form = await self.request.form()
@@ -17,7 +17,7 @@ class LoginForm:
     async def is_valid(self):
         if not self.username or not (self.username.__contains__("@")):
             self.errors.append("Valid Email is mandatory")
-        if not self.password or not len(self.password) >=6:
+        if not self.password or not len(self.password) >= 6:
             self.errors.append("Password needs to be > 6 chars")
 
         if not self.errors:
