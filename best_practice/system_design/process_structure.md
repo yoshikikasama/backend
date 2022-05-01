@@ -13,3 +13,15 @@
     &nbsp;&nbsp;本番環境想定のwebアプリケーションサーバーは複数プロセス起動による並列処理機能と死活監視を提供している。
 
 ■デーモンは自動で起動させる
+
+- デーモン：UNIX系OSのメインメモリ上に常駐して特定の機能を提供するプログラム。利用者の操作とは無関係に処理を行う。  
+&nbsp;&nbsp;別のプログラムや機器、通信相手など外部からの要求を受け付けて処理を実行したり、あらかじめ設定されたタイミングで自律的に特定の処理を実行したりする。
+
+
+サーバー上で、systemdを使ってデーモン化したらsystemctlで自動起動の設定をしておく。  
+サーバー再起動後に自動起動の設定が外れているので、設定を確認する必要がある。
+```
+sudo systemctl start gunicorn-djangoapp
+systemctl is-enabled gunicorn-djangoapp
+systemctl enable gunicorn-djangoapp
+'''
