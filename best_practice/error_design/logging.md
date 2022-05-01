@@ -18,7 +18,7 @@ logger.info(f"Number of Items: {len(items)}")
 &nbsp;仕組みを導入したら全て修正する必要が出てくる.
 
 ```python
-logger.info("Number of Items: %s", len(items))
+logger.info("Number of Items: %s"%len(items))
 ```
 - 「flake8-logging-format」というflake8のプラグインがある、このプラグインをflake8で使うと  
 &nbsp;ログメッセージをフォーマットしている場合に検出してくれる。
