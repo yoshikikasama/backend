@@ -23,3 +23,36 @@
 - プロキシサーバー：受け取ったリクエストを他のサーバーに転送するサーバーのこと。
 - webサーバーとしてApacheやNginxなどを設置し、webアプリケーションサーバーにリバースプロキシで接続する。
 - ヘッダーについている「X-」は独自仕様という意味。
+
+■Unixドメインソケット
+
+- webサーバーとwebアプリケーションサーバーの通信方式を合わせる。可能ならTCPよりも高速なUnixドメインソケットによる  
+&nbsp;リバースプロキシ接続を行う。
+- Unixドメインソケットによる通信では、ファイルパスで通信を行う。  
+&nbsp;例) gunicorn -b unix:/var/run/gunicorn.sock apps.wsgi.application
+
+■不正なドメイン名でのアクセスを拒否する
+
+- 不正なドメイン名でのアクセスを拒否するように、webサーバーの名前ベースのバーチャルホストを設定する。  
+
+例)  
+
+```
+server {
+    listen 80 default_server;
+    return 444;
+}
+
+server{
+    listen 80;
+    server_name app.example.com;
+    location /{
+        proxy_pass http://webapp:8000/;
+    }
+}
+```
+- この設定ではlisten 80 default_serverという設定を持ったserverディレクティブを追加して、不正なドメイン名へのアクセスを全て  
+&nbsp;受信するようにしている。そしてreturn 444;によってNginxがリクエスト元にレスポンスを返さずに即座に通信を切断するように指示している。  
+&nbsp;これによって、不正なリクエストがwebサーバーへ届かないようになっている。
+
+- Firefoxはproxy通信設定がOSの設定から独立しているため、一時的な開発用途でのproxyの設定変更であればFirefoxを利用する。
