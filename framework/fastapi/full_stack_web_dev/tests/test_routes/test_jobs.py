@@ -12,6 +12,7 @@ def test_create_job(client, normal_user_token_headers):
     }
     response = client.post(
         "/jobs/create-job", data=json.dumps(data), headers=normal_user_token_headers)
+    print(vars(response))
     assert response.status_code == 200
     assert response.json()["company"] == "doogle"
     assert response.json()["description"] == "python"
@@ -29,6 +30,5 @@ def test_retreive_job_by_id(client, normal_user_token_headers):
 
     client.post("/jobs/create-job", json.dumps(data), headers=normal_user_token_headers)
     response = client.get("/jobs/get/2")
-    print(vars(response))
     assert response.status_code == 200
     assert response.json()["title"] == "SDE 1 Yahoo"

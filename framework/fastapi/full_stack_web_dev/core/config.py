@@ -26,4 +26,4 @@ class Settings:
 
 settings = Settings()
 
-print(settings.POSTGRES_DB)
+print("settings.POSTGRES_DB:",settings.POSTGRES_DB)
