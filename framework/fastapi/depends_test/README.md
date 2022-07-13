@@ -1,5 +1,7 @@
 # Depends 検証用
 
+![無題の図形描画](https://user-images.githubusercontent.com/61643054/178749185-855e1426-5bdd-4058-b8a6-5fa9b166c6c1.png)
+
 ## Dependency Injectionの説明
 
 https://qiita.com/hshimo/items/1136087e1c6e5c5b0d9f
