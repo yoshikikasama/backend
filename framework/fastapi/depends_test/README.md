@@ -1,27 +1,65 @@
-# full_stack_web_dev
+# Depends 検証用
+
+## Dependency Injectionの説明
+
+https://qiita.com/hshimo/items/1136087e1c6e5c5b0d9f
+
+https://fastapi.tiangolo.com/tutorial/dependencies/
 
 
+## pros, cons
 
-TDD(Test Driven Development)・・・テスト稼働開発。プログラムの実装前にテストコードを書き、
-そのテストコードに適合するように実装とリファクタリングを進めていく方法。実装したい機能のプログラムよりもテストコードを先に書くため、はじめはテストに失敗しますが、プログラムの実装と修正を短いサイクルで何度も繰り返してバグをなくし、正しく動作するコードが書けたらリファクタリングを行います。
+- pros
+    - PytestでDependsで指定した値をOverrideできる
+    - リクエストのたびにDependsの中に指定した関数を実行できる
+    - 同じ処理を何度も記載しなくて良い   
 
+- cons
+    - 特になし
+
+## 検証結果
+
+- CRUD処理内で「db: Session = Depends(get_db)」を使用
+    - ルーティングしているところ以外でDependsを行なってもただのDependsという変数になった。
+```python
+def create_new_job(job: JobCreate, owner_id: int, db: Session = Depends(get_db)):
+```    
+
+
+- CRUD処理内でSessionを定義する。
+    - 可能そうだけど、　SessionをそれぞれのCRUDファイルで定義する必要がある。
+    - 毎回Close処理が必要
+    - PytestでもそれぞれのCRUD処理に対するSessionのOverrideが必要
+```python
+SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+db_session = SessionLocal()
+def create_new_job(job: JobCreate, owner_id: int):
+    db = db_session
+    # print('test:', db)
+    # print('test:', type(db))
+    job = Job(**job.dict(), owner_id=owner_id)
+    db.add(job)
+    db.commit()
+    db.refresh(job)
+    db.close()
+    return job
+```
+
+- SessionってCRUDの中だけで使うからCRUD処理内だけで使ったら良いのでは？
+    - PytestのOverrideができない
+    - 処理を1箇所で管理する記載はこのやり方の方が良い
+
+## 動作コマンド
 処理起動
 ```
 uvicorn main:app --reload
 ```
 
-swagger表示
+Test
 ```
-http://127.0.0.1:8000/docs
-```
-
-網羅率の表示
-```
-pytest --cov="."
-
+pytest
 ```
 
-htmlファイルの作成
-```
-pytest --cov="." --cov-report html
-```
