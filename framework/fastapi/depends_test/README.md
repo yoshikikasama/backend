@@ -51,6 +51,7 @@ def create_new_job(job: JobCreate, owner_id: int):
 - SessionってCRUDの中だけで使うからCRUD処理内だけで使ったら良いのでは？
     - PytestのOverrideができない
     - 処理を1箇所で管理する記載はこのやり方の方が良い
+    - sessionをpytestで置き換えたりする場合はこのやり方が1箇所で管理できてベストな気がする、
 
 ## 動作コマンド
 処理起動
