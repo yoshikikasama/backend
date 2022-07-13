@@ -1,7 +1,6 @@
 # Depends 検証用
 
-![Screen Shot 2022-07-13 at 22 30 55](https://user-images.githubusercontent.com/61643054/178746239-8d70c989-7123-4069-9b9c-91c7cee0f6e5.png)
-
+![無題の図形描画](https://user-images.githubusercontent.com/61643054/178749185-855e1426-5bdd-4058-b8a6-5fa9b166c6c1.png)
 
 ## Dependency Injectionの説明
 
