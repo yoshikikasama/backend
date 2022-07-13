@@ -1,5 +1,8 @@
 # Depends 検証用
 
+![Screen Shot 2022-07-13 at 22 30 55](https://user-images.githubusercontent.com/61643054/178746239-8d70c989-7123-4069-9b9c-91c7cee0f6e5.png)
+
+
 ## Dependency Injectionの説明
 
 https://qiita.com/hshimo/items/1136087e1c6e5c5b0d9f
