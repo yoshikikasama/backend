@@ -1,3 +1,4 @@
+import sys
 import logging
 
 
@@ -14,7 +15,14 @@ class MyLogger:
         # file_handler.setFormatter(formatter)
         # self.logger.addHandler(file_handler)
 
-        console_handler = logging.StreamHandler()
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setLevel(logging.DEBUG)
         console_handler.setFormatter(formatter)
 
+        error_handler = logging.StreamHandler(sys.stderr)
+        error_handler.setLevel(logging.WARNING)
+        error_handler.setFormatter(formatter)
+
+
         self.logger.addHandler(console_handler)
+        self.logger.addHandler(error_handler)

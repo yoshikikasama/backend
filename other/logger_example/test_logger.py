@@ -9,3 +9,9 @@ def ff():
 
 
 ff()
+
+def errors():
+    logger.warning('Errr')
+
+
+print(errors)
