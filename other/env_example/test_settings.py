@@ -13,7 +13,7 @@ print("common_env.sample_a:", common_env.sample_a)
 print("common_env.sample_b:", common_env.sample_b)
 print("special_env.sample_c:", special_env.sample_c)
 
-special_env.messages = 'test_1'
+special_env.append_error_message = 'test_1'
 print("special_env.messages 1回目:", special_env.messages)
-special_env.messages = 'test_2'
+special_env.append_error_message = 'test_2'
 print("special_env.messages 2回目:", special_env.messages)

@@ -28,7 +28,10 @@ class SpecialEnv:
     def messages(self):
         return self.__messages
 
-    # setter method
-    @messages.setter
-    def messages(self, messages):
-        self.__messages.append(messages)
+    # # setter method
+    # @messages.setter
+    # def messages(self, messages):
+    #     self.__messages.append(messages)
+    
+    def append_error_message(self, error_message):
+        self.__messages.append(error_message)
