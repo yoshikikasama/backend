@@ -16,3 +16,5 @@ streamlit hello
 streamlit run main.py
 
 ```
+
+export SUBSCCRIPTION_KEY="<>"
