@@ -1,7 +1,5 @@
 import os
 import time
-
-# import requests
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
@@ -10,7 +8,7 @@ from azure.cognitiveservices.vision.computervision.models import ComputerVisionO
 
 key = os.environ["ACCOUNT_KEY"]
 endpoint = os.environ["END_POINT"]
-image_path = "../img/Screenshot 2023-05-23 at 7.55.37.png"  # ローカルの画像パス
+image_path = "../img/PXL_20230522_231114292.MP.jpg"  # ローカルの画像パス
 
 
 def main(image_path):
@@ -20,7 +18,6 @@ def main(image_path):
         recognize_results = computervision_client.read_in_stream(local_image, language="ja", raw=True)
     except ComputerVisionOcrErrorException as e:
         print("errors:", e.response)
-        print(vars(e))
         raise e
     # 結果を取得するための操作IDを取得
     operation_location_remote = recognize_results.headers["Operation-Location"]
