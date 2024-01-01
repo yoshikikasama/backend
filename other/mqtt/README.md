@@ -11,6 +11,7 @@ brew services list
 brew services stop mosquitto
 pyenv versions
 poetry env list
+poetry init
 poetry shell
 ```
 
