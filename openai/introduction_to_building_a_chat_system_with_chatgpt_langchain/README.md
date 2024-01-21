@@ -15,6 +15,8 @@
 - function calling:
   - 利用可能な関数を LLM に伝えておいて、LLM に関数を使いたいという判断をさせる機能。
   - LLM が使いたいと判断した関数を LLM の利用者側で python などで実行する。
+  - ![image](https://github.com/yoshikikasama/python/assets/61643054/1d8da4a2-1cd4-4911-b3ed-22bed8d0de02)
+
 
 ## 4 章 Langchain の基礎
 
