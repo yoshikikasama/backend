@@ -17,7 +17,6 @@
   - LLM が使いたいと判断した関数を LLM の利用者側で python などで実行する。
   - ![image](https://github.com/yoshikikasama/python/assets/61643054/1d8da4a2-1cd4-4911-b3ed-22bed8d0de02)
 
-
 ## 4 章 Langchain の基礎
 
 - Langchain: LLM を使ったアプリケーション開発に必要な部品を抽象化されたモジュールとして提供している。
@@ -32,3 +31,9 @@
   - Text embedding models: ドキュメントをベクトル化する
   - Vector Stores: ベクトル化したドキュメントの保存先
   - Retrievers: 入力のテキストと関連するドキュメントを検索する
+
+## 6 章 外部検索、履歴を踏まえた応答をする Web アプリの実装
+
+- streamlit の挙動: web アプリにアクセスしたタイミングや入力欄などのウィジェットを操作したタイミングで python script が上から下まで実行され、その内容が画面に表示される。
+
+streamlit run app.py --server.port 8080
