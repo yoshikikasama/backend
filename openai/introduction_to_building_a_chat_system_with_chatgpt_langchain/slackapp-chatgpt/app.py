@@ -4,7 +4,6 @@ import os
 import re
 import time
 import pkg_resources
-import pydantic_core
 
 installed_packages = {pkg.key for pkg in pkg_resources.working_set}
 print(list(installed_packages))
@@ -26,7 +25,10 @@ load_dotenv()
 
 # ログ
 SlackRequestHandler.clear_all_log_handlers()
-logging.basicConfig(format="%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d - %(message)s", level=logging.INFO)
+logging.basicConfig(
+    format="%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d - %(message)s",
+    level=logging.INFO,
+)
 logger = logging.getLogger(__name__)
 
 # ボットトークンを使ってアプリを初期化します
@@ -53,7 +55,11 @@ class SlackStreamingCallbackHandler(BaseCallbackHandler):
 
         now = time.time()
         if now - self.last_send_time > self.interval:
-            app.client.chat_update(channel=self.channel, ts=self.ts, text=f"{self.message}\n\nTyping...")
+            app.client.chat_update(
+                channel=self.channel,
+                ts=self.ts,
+                text=f"{self.message}\n\nTyping...",
+            )
             self.last_send_time = now
             self.update_count += 1
 
@@ -62,9 +68,14 @@ class SlackStreamingCallbackHandler(BaseCallbackHandler):
                 self.interval = self.interval * 2
 
     def on_llm_end(self, response: LLMResult, **kwargs: Any) -> Any:
-        message_context = "OpenAI APIで生成される情報は不正確または不適切な場合がありますが、当社の見解を述べるものではありません。"
+        message_context = (
+            "OpenAI APIで生成される情報は不正確または不適切な場合がありますが、当社の見解を述べるものではありません。"
+        )
         message_blocks = [
-            {"type": "section", "text": {"type": "mrkdwn", "text": self.message}},
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": self.message},
+            },
             {"type": "divider"},
             {
                 "type": "context",
@@ -134,7 +145,9 @@ def handler(event, context):
     logger.info(json.dumps(header))
 
     if "x-slack-retry-num" in header:
-        logger.info("SKIP > x-slack-retry-num: %s", header["x-slack-retry-num"])
+        logger.info(
+            "SKIP > x-slack-retry-num: %s", header["x-slack-retry-num"]
+        )
         return 200
 
     # AWS Lambda 環境のリクエスト情報を app が処理できるよう変換してくれるアダプター

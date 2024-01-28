@@ -6,7 +6,10 @@ provider:
   region: ap-northeast-1
   stage: dev
   runtime: python3.10
+<<<<<<< HEAD
   architecture: arm64
+=======
+>>>>>>> 092ecf6 (20240128)
   iam:
     role:
       statements:
@@ -32,10 +35,13 @@ functions:
     timeout: 900
     url: true
 
+<<<<<<< HEAD
 custom:
   pythonRequirements:
     dockerizePip: true
 
+=======
+>>>>>>> 092ecf6 (20240128)
 plugins:
   - serverless-python-requirements
   - serverless-dotenv-plugin

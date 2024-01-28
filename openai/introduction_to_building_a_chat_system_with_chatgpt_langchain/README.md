@@ -40,12 +40,42 @@ https://github.com/yoshidashingo/langchain-book/
 
 streamlit run app.py --server.port 8080
 
-## 7 章 Slackアプリ実装
+## 7 章 Slack アプリ実装
 
-- Momento Cache: Serverlessなcache service
+- Momento Cache: Serverless な cache service
 
 ```
 sls plugin install -n serverless-python-requirements
 sls plugin install -n serverless-dotenv-plugin
 AWS_SDK_LOAD_CONFIG=true AWS_PROFILE=infa-role  sls deploy
 ```
+
+## 8 　章 社内文書に答える Slack アプリの実装
+
+- RAG:
+  - 複数の検索結果を提示する。
+  - RAG により要約してもらい回答いただく。
+- 文章整理: 複数の文書を一定のチャンクサイズに分割して、一定のサイズごとに埋め込み表現に変換するような場合、一部の文章だけ飛び抜けて冗長で複数のチャンクにまたがってしまうとアプリの作りによっては回答の精度が下がってしまうので、可能な限り、同一の知識が同じチャンク内に収まるように工夫する。
+
+- ベクターデータベース:
+  - pinecone
+  - Azure Cognitive Search
+  - Amazon Kendra
+
+## 9 章 LLM アプリの本番リリースに向けて
+
+- 生成 AI の利用ガイドラインをもとにした自社ガイドラインを作成する。
+- 回答の正確性に関する制約表示: 生成 AI によって生成される情報は不正確または不適切な場合がありますが、当社の見解を述べるものではありません。といった注意書きを表示する。
+
+- アプリの特性に合わせた評価手法の選定や評価手順の確立
+- 運用ノウハウ
+- トラブルシューティング
+- チューニング
+- リスクアセスメント: 国内なのか、海外なのかによっても著作権や個人データのコンプライアンス基準が異なる。リスクが顕在化した際の事業活動への影響度合いを調べ、あらかじめリスク評価する。
+
+- RAG:
+  - テスト対象のデータセットに対するテストパラメータとなる質問と、期待される答えを網羅的に作成し、RAG で生成された答えの埋め込み情報(embeddings)と期待される答えの埋め込み情報の類似度正確性を評価する指標として、評価の自動化処理を構築することができる。
+  - 性能監視
+  - 安全性
+  - 透明性
+  - 公平性
