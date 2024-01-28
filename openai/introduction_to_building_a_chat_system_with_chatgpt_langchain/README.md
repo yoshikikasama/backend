@@ -1,5 +1,7 @@
 # ChatGPT/Langchain によるチャットシステム構築入門
 
+https://github.com/yoshidashingo/langchain-book/
+
 ## 2 章 プロンプトエンジニアリング
 
 - ファインチューニング: 既存モデルに追加の学習をさせる。
@@ -37,3 +39,13 @@
 - streamlit の挙動: web アプリにアクセスしたタイミングや入力欄などのウィジェットを操作したタイミングで python script が上から下まで実行され、その内容が画面に表示される。
 
 streamlit run app.py --server.port 8080
+
+## 7 章 Slackアプリ実装
+
+- Momento Cache: Serverlessなcache service
+
+```
+sls plugin install -n serverless-python-requirements
+sls plugin install -n serverless-dotenv-plugin
+AWS_SDK_LOAD_CONFIG=true AWS_PROFILE=infa-role  sls deploy
+```
