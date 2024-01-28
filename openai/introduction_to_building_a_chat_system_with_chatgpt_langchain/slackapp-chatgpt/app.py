@@ -10,11 +10,16 @@ print(list(installed_packages))
 from datetime import timedelta
 from typing import Any
 
+from add_document import initialize_vectorstore
 from dotenv import load_dotenv
 from langchain.callbacks.base import BaseCallbackHandler
+from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
-from langchain.memory import MomentoChatMessageHistory
-from langchain.schema import HumanMessage, LLMResult, SystemMessage
+from langchain.memory import (
+    ConversationBufferMemory,
+    MomentoChatMessageHistory,
+)
+from langchain.schema import LLMResult
 from slack_bolt import App
 from slack_bolt.adapter.aws_lambda import SlackRequestHandler
 from slack_bolt.adapter.socket_mode import SocketModeHandler
@@ -26,8 +31,7 @@ load_dotenv()
 # ログ
 SlackRequestHandler.clear_all_log_handlers()
 logging.basicConfig(
-    format="%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d - %(message)s",
-    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
@@ -109,12 +113,11 @@ def handle_mention(event, say):
         os.environ["MOMENTO_CACHE"],
         timedelta(hours=int(os.environ["MOMENTO_TTL"])),
     )
+    memory = ConversationBufferMemory(
+        chat_memory=history, memory_key="chat_history", return_messages=True
+    )
 
-    messages = [SystemMessage(content="You are a good assistant.")]
-    messages.extend(history.messages)
-    messages.append(HumanMessage(content=message))
-
-    history.add_user_message(message)
+    vectorstore = initialize_vectorstore()
 
     callback = SlackStreamingCallbackHandler(channel=channel, ts=ts)
     llm = ChatOpenAI(
@@ -123,9 +126,19 @@ def handle_mention(event, say):
         streaming=True,
         callbacks=[callback],
     )
+    condense_question_llm = ChatOpenAI(
+        model_name=os.environ["OPENAI_API_MODEL"],
+        temperature=os.environ["OPENAI_API_TEMPERATURE"],
+    )
 
-    ai_message = llm(messages)
-    history.add_message(ai_message)
+    qa_chain = ConversationalRetrievalChain.from_llm(
+        llm=llm,
+        retriever=vectorstore.as_retriever(),
+        memory=memory,
+        condense_question_llm=condense_question_llm,
+    )
+
+    qa_chain.run(message)
 
 
 def just_ack(ack):
