@@ -1,13 +1,17 @@
-"""
-戻り値がリストの関数のテストで要素数をテストする。
-"""
-from items import load_items
+from unittest import mock
 
 
-class TestLoadItems:
-    def test_load(self):
-        actual = load_items()
+def test_is_enough_spam(self):
+    from hoge.tests.factories import SpamFactory
 
-        assert len(actual) == 2
-        assert actual[0] == {"id": 1, "name": "Coffee"}
-        assert actual[1] == {"id": 2, "name": "Cake"}
+    piyo_id = 9
+    SpamFactory(piyo_id=piyo_id)
+    SpamFactory(piyo_id=piyo_id)
+
+    # NUM_OF_SPAM = 1として置き換えられる
+    with mock.patch('hoge.NUM_OF_SPAM', new=1):
+        from hoge import is_enough_spam
+
+        actual = is_enough_spam(piyo_id=piyo_id)
+    
+    self.assertTrue(actual)

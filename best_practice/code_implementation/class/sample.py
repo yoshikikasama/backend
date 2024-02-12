@@ -25,7 +25,7 @@ class User:
     @property
     def age(self):
         # birthdayが変更される可能性があるため、age関数として作成
-        # functool.lru_cache
+        # functool.lru_cacheを使ってpropertyの計算結果をメモリにキャッシュさせる。
         today = date.today()
         born = self.birthday
         age = today.year - born.year
@@ -36,7 +36,7 @@ class User:
 
 
 def load_user():
-    with open('./user.json', encoding='utf-8') as f:
+    with open("./user.json", encoding="utf-8") as f:
         return User(**json.load(f))
 
 
@@ -48,13 +48,9 @@ class Product:
 
     @classmethod
     def retrieve(cls, id: int):
-        """データAPIから商品の情報を取得して、インスタンスとして返す
-        """
+        """データAPIから商品の情報を取得して、インスタンスとして返す"""
         data = retrieve_product_detail(id)
-        return cls(
-            id=data['id'],
-            name=data['name']
-        )
+        return cls(id=data["id"], name=data["name"])
 
 
 # クラスメソッドにすることでProductクラスから値を取得する処理も使用できる。
