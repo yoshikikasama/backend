@@ -17,6 +17,8 @@
 
 ■ リバースプロキシ
 
+- <img width="978" alt="image" src="https://github.com/yoshikikasama/python/assets/61643054/2ed72579-ce2d-461e-aa86-4a0609e77196">
+
 - リバースプロキシ：web サーバーで受け取ったリクエストをバックエンドの web アプリケーションサーバー(Gunicorn, Apache, Nginx)に渡すフロントの web サーバー。
   - インターネットでは web サイトに対してロングポーリングや巨大なリクエストを送りつけるといった多種多様な攻撃が日々繰り返されており、
   - こういった攻撃に対する仕組みは Gunicorn や Django では提供されていない。
