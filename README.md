@@ -1,3 +1,1 @@
-# Python coding
-
-Python study directory
+# Backend study directory
