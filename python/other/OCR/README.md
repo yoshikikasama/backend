@@ -11,3 +11,7 @@ https://learn.microsoft.com/en-us/python/api/azure-cognitiveservices-vision-comp
 
 - そのまま実行
   image_path = "../img/PXL_20230521_022935737.MP.jpg" # ローカルの画像パス
+
+```txt
+pip install azure-cognitiveservices-vision-computervision
+```
