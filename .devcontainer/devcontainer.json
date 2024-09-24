@@ -1,0 +1,127 @@
+{
+  "name": "My DevContainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "mounts": [
+    // AWSのプロファイルディレクトリをマウント
+    "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": [
+    "bash",
+    "-c",
+    "pip install -r requirements.txt && npm install && npm install -g aws-cdk"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "kddejong.vscode-cfn-lint",
+        "amazonwebservices.aws-toolkit-vscode",
+        "charliermarsh.ruff",
+        "davidanson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "foxundermoon.shell-format",
+        "hediet.vscode-drawio",
+        "janisdd.vscode-edit-csv",
+        "marp-team.marp-vscode",
+        "mechatroner.rainbow-csv",
+        "ms-azuretools.vscode-docker",
+        "ms-ceintl.vscode-language-pack-ja",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "redhat.vscode-yaml",
+        "renesaarsoo.sql-formatter-vsc",
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck",
+        "vscode-icons-team.vscode-icons",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "git.autorefresh": true,
+        "workbench.colorTheme": "Visual Studio Dark",
+        "hediet.vscode-drawio.resizeImages": null,
+        "editor.semanticTokenColorCustomizations": {},
+        "editor.formatOnSave": false,
+        "python.defaultInterpreterPath": "/opt/venv/bin/python",
+        "python.pythonPath": "/opt/venv/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnType": true,
+          // ファイルの保存時にフォーマットを自動実行する場合
+          "editor.formatOnSave": true
+        },
+        "[markdown]": {
+          "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+        },
+
+        "[sql]": {
+          "editor.formatOnSave": false,
+          "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[shellscript]": {
+          "editor.defaultFormatter": "foxundermoon.shell-format",
+          "editor.formatOnSave": true
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "redhat.vscode-yaml",
+          "editor.insertSpaces": true,
+          "editor.tabSize": 2,
+          "cfnLint.validate": true,
+          "cfnLint.path": "/opt/venv/bin/cfn-lint"
+        },
+
+        "editor.fontLigatures": false,
+        "security.workspace.trust.enabled": false,
+        "yaml.customTags": [
+          "!And",
+          "!And sequence",
+          "!If",
+          "!If sequence",
+          "!Not",
+          "!Not sequence",
+          "!Equals",
+          "!Equals sequence",
+          "!Or",
+          "!Or sequence",
+          "!FindInMap",
+          "!FindInMap sequence",
+          "!Base64",
+          "!Join",
+          "!Join sequence",
+          "!Cidr",
+          "!Ref",
+          "!Sub",
+          "!Sub sequence",
+          "!GetAtt",
+          "!GetAZs",
+          "!ImportValue",
+          "!ImportValue sequence",
+          "!Select",
+          "!Select sequence",
+          "!Split",
+          "!Split sequence"
+        ],
+        "aws.suppressPrompts": {
+          "regionAddAutomatically": true
+        },
+        "files.insertFinalNewline": true,
+        "workbench.iconTheme": "vscode-icons",
+        "typescript.updateImportsOnFileMove.enabled": "always"
+      }
+    }
+  }
+}
