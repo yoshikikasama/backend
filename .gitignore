@@ -1,5 +1,6 @@
 __pycache__/
 .DS_Store
+*.js
 *.csv
 *.xlsx
 .vscode
@@ -12,11 +13,9 @@ poetry.lock
 node_modules/
 <<<<<<< HEAD
 package-lock.json
-package.json
 .serverless
 =======
 .serverless
 package-lock.json
-package.json
 >>>>>>> 092ecf6 (20240128)
 .python-version

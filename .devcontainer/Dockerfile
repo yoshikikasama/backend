@@ -4,8 +4,8 @@ FROM debian:bookworm-slim
 # バージョンの指定
 ARG PYTHON_VERSION=3.12.0
 ARG NODE_VERSION=20.17.0
+ARG AWS_CDK_VERSION=2.160.0
 ARG TARGETARCH
-
 
 # 環境変数の設定
 ENV VIRTUAL_ENV=/opt/venv
@@ -48,7 +48,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     && cd / \
     && rm -f Python-${PYTHON_VERSION}.tar.xz \
     && rm -rf /tmp/Python-${PYTHON_VERSION} 
-    
+
 # 仮想環境の作成とpipのアップグレード
 RUN --mount=type=cache,target=/root/.cache/pip \
     python${PYTHON_VERSION%.*} -m venv $VIRTUAL_ENV \
@@ -67,7 +67,6 @@ RUN case ${TARGETARCH} in \
 # 環境変数の設定
 ENV PATH="/usr/local/bin:$VIRTUAL_ENV/bin:$PATH"
 
-
 # AWS CLIのインストール
 RUN case ${TARGETARCH} in \
         "amd64") \
@@ -82,6 +81,10 @@ RUN case ${TARGETARCH} in \
     unzip awscliv2.zip && \
     ./aws/install && \
     rm -rf aws awscliv2.zip
+
+# AWS CDKのインストール
+RUN --mount=type=cache,target=/root/.npm,sharing=locked \
+    npm install -g aws-cdk@${AWS_CDK_VERSION}
 
 # 作業ディレクトリの設定
 WORKDIR /workspace

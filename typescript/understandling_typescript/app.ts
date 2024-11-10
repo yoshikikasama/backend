@@ -17,21 +17,40 @@
 
 // add(number1, number2, printResult, resultPhrase);
 
-const person: {
-    name: string;
-    age: number;
-    hobbies: string[];
-    role: [number, string];
-} = {
-    name: 'yoshi',
-    age: 28,
-    hobbies: ['sports', 'cooking'],
-    role: [2, 'author'],
-};
+// enum Role {
+//   ADMIN,
+//   READ_ONLY,
+//   AUTHOR,
+// }
 
-console.log(person);
+// const person: {
+//   name: string;
+//   age: number;
+//   hobbies: string[];
+//   role: Role;
+// } = {
+//   name: "yoshi",
+//   age: 28,
+//   hobbies: ["sports", "cooking"],
+//   role: Role.ADMIN,
+// };
 
-person.role = [0, 'admin']
+// console.log(person);
 
-let favoriteActivities: string[];
-favoriteActivities = ['Sports']
+// person.role = [0, "admin"];
+
+// let favoriteActivities: string[];
+// favoriteActivities = ["Sports"];
+
+// function combine(input1: number | string, input2: number | string) {
+//   const result = input1 + input2;
+//   return result;
+// }
+
+// const combineAges = combine(30, 25);
+
+// console.log(combineAges);
+
+const userName = "てsと";
+
+console.log(userName);
