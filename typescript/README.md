@@ -1,6 +1,4 @@
-# Backend study directory
-
-## Typescript
+# Typescript
 
 ### Command
 
