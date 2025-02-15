@@ -1,18 +1,18 @@
 {
-  "name": "My DevContainer", 
+  "name": "My DevContainer",
   "build": {
-      "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile"
   },
-  "workspaceFolder": "/workspace", 
+  "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "mounts": [
-      // AWSのプロファイルディレクトリをマウント
-      "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached",
+    // AWSのプロファイルディレクトリをマウント
+    "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached"
   ],
- "postCreateCommand": [
-      "bash",
-      "-c",
-      "pip install -r requirements.txt && npm install"
+  "postCreateCommand": [
+    "bash",
+    "-c",
+    "pip install -r requirements.txt && npm install"
   ],
   "customizations": {
     "vscode": {
@@ -65,7 +65,8 @@
         "vscode-icons-team.vscode-icons",
         // Markdown機能拡張
         "yzhang.markdown-all-in-one",
-        "ritwickdey.LiveServer"
+        "ritwickdey.LiveServer",
+        "shd101wyy.markdown-preview-enhanced"
       ],
       "settings": {
         // Gitの自動更新を有効化
@@ -83,41 +84,41 @@
         "python.pythonPath": "/opt/venv/bin/python",
         // Python固有の設定
         "[python]": {
-            "editor.defaultFormatter": "charliermarsh.ruff",
-            "editor.formatOnType": true,
-            "editor.formatOnSave": true
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnType": true,
+          "editor.formatOnSave": true
         },
         // Markdown固有の設定
         "[markdown]": {
-            "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+          "editor.defaultFormatter": "yzhang.markdown-all-in-one"
         },
         // SQL固有の設定
         "[sql]": {
-            "editor.formatOnSave": false,
-            "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
+          "editor.formatOnSave": false,
+          "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
         },
         // JavaScript固有の設定
         "[javascript]": {
-            "editor.defaultFormatter": "esbenp.prettier-vscode",
-            "editor.formatOnSave": true
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
         },
         // TypeScript固有の設定
         "[typescript]": {
-            "editor.defaultFormatter": "esbenp.prettier-vscode",
-            "editor.formatOnSave": true
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
         },
         // シェルスクリプト固有の設定
         "[shellscript]": {
-            "editor.defaultFormatter": "foxundermoon.shell-format",
-            "editor.formatOnSave": true
+          "editor.defaultFormatter": "foxundermoon.shell-format",
+          "editor.formatOnSave": true
         },
         // YAML固有の設定
         "[yaml]": {
-            "editor.defaultFormatter": "redhat.vscode-yaml",
-            "editor.insertSpaces": true,
-            "editor.tabSize": 2,
-            "cfnLint.validate": true,
-            "cfnLint.path": "/opt/venv/bin/cfn-lint"    
+          "editor.defaultFormatter": "redhat.vscode-yaml",
+          "editor.insertSpaces": true,
+          "editor.tabSize": 2,
+          "cfnLint.validate": true,
+          "cfnLint.path": "/opt/venv/bin/cfn-lint"
         },
         // フォントリガチャを無効化
         "editor.fontLigatures": false,
@@ -125,17 +126,37 @@
         "security.workspace.trust.enabled": false,
         // YAMLのカスタムタグ設定（CloudFormation用）
         "yaml.customTags": [
-            "!And", "!And sequence", "!If", "!If sequence",
-            "!Not", "!Not sequence", "!Equals", "!Equals sequence",
-            "!Or", "!Or sequence", "!FindInMap", "!FindInMap sequence",
-            "!Base64", "!Join", "!Join sequence", "!Cidr",
-            "!Ref", "!Sub", "!Sub sequence", "!GetAtt",
-            "!GetAZs", "!ImportValue", "!ImportValue sequence",
-            "!Select", "!Select sequence", "!Split", "!Split sequence"
+          "!And",
+          "!And sequence",
+          "!If",
+          "!If sequence",
+          "!Not",
+          "!Not sequence",
+          "!Equals",
+          "!Equals sequence",
+          "!Or",
+          "!Or sequence",
+          "!FindInMap",
+          "!FindInMap sequence",
+          "!Base64",
+          "!Join",
+          "!Join sequence",
+          "!Cidr",
+          "!Ref",
+          "!Sub",
+          "!Sub sequence",
+          "!GetAtt",
+          "!GetAZs",
+          "!ImportValue",
+          "!ImportValue sequence",
+          "!Select",
+          "!Select sequence",
+          "!Split",
+          "!Split sequence"
         ],
         // AWSツールキットのプロンプト抑制設定
         "aws.suppressPrompts": {
-            "regionAddAutomatically": true
+          "regionAddAutomatically": true
         },
         // ファイル末尾に改行を挿入
         "files.insertFinalNewline": true,
